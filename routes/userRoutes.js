@@ -63,10 +63,50 @@ router.post("/login", async (req, res) => {
 // ===============================
 // PROTECTED ROUTE
 // ===============================
-router.get("/protected", apiKeyAuth, (req, res) => {
+// router.get("/protected", apiKeyAuth, (req, res) => {
+//   res.json({
+//     message: "Protected data accessed ✔️",
+//     user: req.user.username,
+//   });
+// });
+// ===============================
+
+
+// 1️⃣ Basic profile route
+router.get("/profile", apiKeyAuth, (req, res) => {
   res.json({
-    message: "Protected data accessed ✔️",
+    message: "Your profile info",
     user: req.user.username,
+  });
+});
+
+// 2️⃣ Dashboard route
+router.get("/dashboard", apiKeyAuth, (req, res) => {
+  res.json({
+    message: "Dashboard data loaded",
+    stats: {
+    usage: "12% API usage",
+    keyAssigned: true,
+    },
+  });
+});
+
+// 3️⃣ Settings route
+router.get("/settings", apiKeyAuth, (req, res) => {
+  res.json({
+    message: "Settings loaded",
+    userSettings: {
+      theme: "dark",
+      notifications: true,
+    },
+  });
+});
+
+// 4️⃣ Secure Admin-only route (example)
+router.get("/admin/data", apiKeyAuth, (req, res) => {
+  res.json({
+    message: "Admin Data Accessed",
+    securityLevel: "High",
   });
 });
 
